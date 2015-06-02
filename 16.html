@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<style>
+	#sprite{
+		position:absolute;
+		width:95px;
+		height:95px;		
+		background-image:url(image/sprite.png); 
+		}
+
+	#area{
+		background-color: #9cc;
+		width: 800px;
+		height: 480px;
+		overflow: hidden;
+		position: relative;
+
+	}	
+</style>
+<script>
+	var posX
+	var posY
+	var avion;
+	
+	var tArriba;
+	var tAbajo;
+	var tIzquierda;
+	var tDerecha;
+	
+	window.onload = init;
+	function init(){
+		tArriba = false;
+		tAbajo = false;
+		tIzquierda = false;
+		tDerecha = false;
+		
+		
+		posX=160;
+		posY=160;
+		avion = document.getElementById("sprite");
+		avion.style.left = posX + "px"
+		avion.style.top = posY + "px" 
+		window.onkeydown = teclaPresionada
+		window.onkeyup = teclaLiberada
+		
+		setInterval(detectar,20)
+		}
+	function teclaPresionada(e){
+		switch(e.keyCode){
+			case 40:
+				tAbajo = true;	
+				break;
+			case 38:
+				tArriba = true;
+				break;
+			case 39:
+				tDerecha = true;
+				break;
+			case 37:
+				tIzquierda = true;
+				break;			
+			}
+			
+		}	
+	function teclaLiberada(e){
+		switch(e.keyCode){
+			case 40:
+				tAbajo = false;	
+				
+				break;
+			case 38:
+				tArriba = false;
+				
+				break;
+			case 39:
+				tDerecha = false;
+				
+				break;
+			case 37:
+				tIzquierda = false;
+				
+				break;			
+			}
+			
+		}
+	function detectar(){
+		if(tAbajo==true){
+			posY += 5;
+			avion.style.backgroundPosition="0 0";
+			}
+		if(tArriba==true){
+			posY -= 5;
+			avion.style.backgroundPosition="0px -95px";
+			}	
+		if(tDerecha==true){
+			posX += 5;
+			avion.style.backgroundPosition="-190px -190px";
+			}
+		if(tIzquierda==true){
+			posX -= 5;
+			avion.style.backgroundPosition="-95px -190px";
+			}
+		avion.style.left = posX + "px";
+		avion.style.top = posY + "px"; 		
+		}			
+</script>
+</head>
+
+<body>
+<div id="area">
+	<div id="sprite"></div>
+</div>
+</body>
+</html>
